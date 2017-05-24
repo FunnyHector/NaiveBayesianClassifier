@@ -10,7 +10,7 @@ class Instance
     instance_variable_set("@spam", values[-1])
 
     instance_variables.each do |variable|
-      method_name = variable.to_s[1..-1].concat("?")
+      method_name = variable.to_s[1..-1] + ("?")
       define_singleton_method(method_name) { instance_variable_get(variable) }
     end
   end

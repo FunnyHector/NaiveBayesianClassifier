@@ -1,4 +1,5 @@
 require "./instance.rb"
+require "./naive_bayesian_classifier.rb"
 
 DEFAULT_TRAINING_FILE = "spamLabelled.dat".freeze
 DEFAULT_TEST_FILE     = "spamUnlabelled.dat".freeze
@@ -28,11 +29,13 @@ else
 end
 
 output_txt << " - Training file: \"./#{training_file}\""
-output_txt << "  # default" if training_file == DEFAULT_IMAGE_FILE
+output_txt << "  # default" if training_file == DEFAULT_TRAINING_FILE
 output_txt << "\n"
 
 output_txt << " - Test image file: \"./#{test_file}\""
-output_txt << "  # default" if test_file == DEFAULT_TEST_IMAGE_FILE
+output_txt << "  # default" if test_file == DEFAULT_TEST_FILE
 output_txt << "\n"
 
-instances = read_file(training_file)
+classifier = NaiveBayesianClassifier.new(read_file(training_file))
+
+classifier.test
