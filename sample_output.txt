@@ -1,0 +1,11 @@
+Results of classification:
+No.01: Spam: false, Score(Spam): 3.6311e-06, Score(Normal): 4.5746e-04
+No.02: Spam:  true, Score(Spam): 5.7370e-05, Score(Normal): 4.1956e-05
+No.03: Spam:  true, Score(Spam): 1.8600e-04, Score(Normal): 1.2886e-04
+No.04: Spam: false, Score(Spam): 6.0976e-06, Score(Normal): 5.9709e-04
+No.05: Spam: false, Score(Spam): 6.1427e-05, Score(Normal): 9.2572e-05
+No.06: Spam:  true, Score(Spam): 5.9152e-05, Score(Normal): 4.6410e-05
+No.07: Spam: false, Score(Spam): 4.0777e-06, Score(Normal): 3.2692e-04
+No.08: Spam: false, Score(Spam): 6.4591e-05, Score(Normal): 3.9111e-04
+No.09: Spam:  true, Score(Spam): 1.8600e-04, Score(Normal): 3.7936e-05
+No.10: Spam: false, Score(Spam): 2.2560e-05, Score(Normal): 6.7760e-04

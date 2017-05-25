@@ -10,5 +10,7 @@ class Instance
     instance_variables.each do |variable|
       define_singleton_method(variable.to_s[1..-1]) { instance_variable_get(variable) }
     end
+
+    define_singleton_method("spam=") { |label| instance_variable_set("@spam", label) }
   end
 end

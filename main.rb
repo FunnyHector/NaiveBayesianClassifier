@@ -16,32 +16,39 @@ end
 # ========== Here we go ===============
 
 # set parameters
-training_file  = ARGV[0].nil? ? DEFAULT_TRAINING_FILE : ARGV[0]
-test_file      = ARGV[1].nil? ? DEFAULT_TEST_FILE : ARGV[1]
-
-output_txt = ""
+training_file = ARGV[0].nil? ? DEFAULT_TRAINING_FILE : ARGV[0]
+test_file     = ARGV[1].nil? ? DEFAULT_TEST_FILE : ARGV[1]
 
 # display the parameters
 if ARGV.empty?
-  output_txt << "No arguments found.\nTo provide arguments, run: ruby main.rb [training_file] [test_file]\n\nRunning with default parameters:\n"
+  puts "No arguments found.\nTo provide arguments, run: ruby main.rb [training_file] [test_file]\n\nRunning with default parameters:"
 else
-  output_txt << "Arguments found. Running with parameters:\n"
+  puts "Arguments found. Running with parameters:"
 end
 
-output_txt << " - Training file: \"./#{training_file}\""
-output_txt << "  # default" if training_file == DEFAULT_TRAINING_FILE
-output_txt << "\n"
+print " - Training file: \"./#{training_file}\""
+print "  # default" if training_file == DEFAULT_TRAINING_FILE
+print "\n"
+print " - Test file: \"./#{test_file}\""
+print "  # default" if test_file == DEFAULT_TEST_FILE
+print "\n\n"
+print "===============================================\n\n"
 
-output_txt << " - Test image file: \"./#{test_file}\""
-output_txt << "  # default" if test_file == DEFAULT_TEST_FILE
-output_txt << "\n"
-
+# read in the training set, and construct the classifier
 classifier = NaiveBayesianClassifier.new(read_file(training_file))
 
-test_instances = read_file(test_file)
+# run the magic
+classifier.classify!(read_file(test_file))
 
-# classifier.test
+# get the results
+results = classifier.results
 
-classifier.classify!(test_instances)
+# output the results to console and sample_output_txt
+output = "Results of classification:\n"
 
+results.each_with_index do |result, index|
+  output << "No.#{format("%02d", index + 1)}: Spam: #{result[0].to_s.rjust(5)}, Score(Spam): #{format("%1.4e", result[1])}, Score(Normal): #{format("%1.4e", result[2])}\n"
+end
 
+puts output
+File.write("./sample_output.txt", output)
