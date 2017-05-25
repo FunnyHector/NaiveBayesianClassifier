@@ -38,4 +38,10 @@ output_txt << "\n"
 
 classifier = NaiveBayesianClassifier.new(read_file(training_file))
 
-classifier.test
+test_instances = read_file(test_file)
+
+# classifier.test
+
+classifier.classify!(test_instances)
+
+
