@@ -1,5 +1,6 @@
 require "./instance.rb"
 require "./naive_bayesian_classifier.rb"
+require "yaml"
 
 DEFAULT_TRAINING_FILE = "spamLabelled.dat".freeze
 DEFAULT_TEST_FILE     = "spamUnlabelled.dat".freeze
@@ -42,10 +43,13 @@ classifier.classify!(read_file(test_file))
 
 # get the results
 results = classifier.results
+probabilities = YAML.dump(classifier.probabilities).gsub("---\n", "")
 
 # output the results to console and sample_output_txt
-output = "Results of classification:\n"
+output = "Probability table (in YAML format):\n"
+output << probabilities
 
+output << "\nResults of classification:\n"
 results.each_with_index do |result, index|
   output << "No.#{format("%02d", index + 1)}: Spam: #{result[0].to_s.rjust(5)}, Score(Spam): #{format("%1.4e", result[1])}, Score(Normal): #{format("%1.4e", result[2])}\n"
 end
